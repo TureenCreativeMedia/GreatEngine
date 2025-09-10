@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class Pipe : MonoBehaviour
 {
+    private Transform _transform;
     [SerializeField] float moveSpeed;
 
     [SerializeField] GameObject TopPipe;
     [SerializeField] GameObject BottomPipe;
 
+    private void Awake()
+    {
+        _transform = transform;
+        gameObject.tag = "Pipe";
+    }
+
     void Start()
     {
-        this.tag = "Pipe";
-
         if (BottomPipe == null || TopPipe == null)
         {
             Debug.LogWarning("One or two pipes are null, attempting reformation");
@@ -26,16 +31,17 @@ public class Pipe : MonoBehaviour
             }
         }
 
-        TopPipe.transform.localPosition = new Vector2(0, CONSTANTS.PIPE_GAP_SIZE);
-        BottomPipe.transform.localPosition = new Vector2(0, -CONSTANTS.PIPE_GAP_SIZE);
+        float gap = CONFIG.PIPE_GAP_SIZE;
+        TopPipe.transform.localPosition = new Vector2(0f, gap);
+        BottomPipe.transform.localPosition = new Vector2(0f, -gap);
     }
 
     void Update()
     {
-        moveSpeed = CONSTANTS.GAME_PAUSED ? 0 : CONSTANTS.PIPE_SPEED;
-        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+        moveSpeed = CONSTANTS.GAME_PAUSED ? 0 : CONFIG.PIPE_SPEED;
+        _transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
-        if (transform.position.x < -12f)
+        if (_transform.position.x < -12f)
         {
             Destroy(gameObject);
         }

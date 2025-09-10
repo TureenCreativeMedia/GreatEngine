@@ -16,6 +16,6 @@ public class LoadingBar : MonoBehaviour
 
     void Update()
     {
-        percentage.text = $"{bar.value}%";
+        percentage.text = $"{Mathf.Round(bar.value * 10)}%";
     }
 }

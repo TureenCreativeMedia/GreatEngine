@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1215138779022470654
 Transform:
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78052684a9765a40973b4e2f4ac60e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  this_PipeType: 1
+  pipeType: 1
 --- !u!61 &8944956091726899970
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,7 +175,6 @@ MonoBehaviour:
   moveSpeed: 0
   TopPipe: {fileID: 1215138780882612379}
   BottomPipe: {fileID: 1215138779022470652}
-  Coin: {fileID: 0}
 --- !u!1 &1215138780882612379
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +192,7 @@ GameObject:
   m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1215138780882612381
 Transform:
@@ -274,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78052684a9765a40973b4e2f4ac60e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  this_PipeType: 0
+  pipeType: 0
 --- !u!61 &3022159230276241051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -311,6 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9210390184199794922}
   - component: {fileID: 3924291208982748884}
+  - component: {fileID: 5697265203238843332}
   m_Layer: 0
   m_Name: Score
   m_TagString: Score
@@ -359,3 +359,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 6}
   m_EdgeRadius: 0
+--- !u!114 &5697265203238843332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375671670245733223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b25b90f344df743883b4a8e94bfce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cMiddleCollider: {fileID: 3924291208982748884}

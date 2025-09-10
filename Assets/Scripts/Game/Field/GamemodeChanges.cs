@@ -11,11 +11,11 @@ public static class GamemodeChanges
                 default:
                     CONSTANTS.BIRB_GRAV = 1.2f;
                     CONSTANTS.BACKGROUND_COLOR = "36A0E2";
-                    CONSTANTS.PIPE_HEIGHT = 1f;
-                    CONSTANTS.MAXIMUM_PIPESPAWN_TIME = 5f;
-                    CONSTANTS.MINIMUM_PIPESPAWN_TIME = 3f;
-                    CONSTANTS.PIPE_GAP_SIZE = 4f;
-                    CONSTANTS.PIPE_SPEED = 3f;
+                    CONFIG.PIPE_HEIGHT = 1f;
+                    CONFIG.MAX_PIPE_SPAWN_TIME = 5f;
+                    CONFIG.MIN_PIPE_SPAWN_TIME = 3f;
+                    CONFIG.PIPE_GAP_SIZE = 4.5f;
+                    CONFIG.PIPE_SPEED = 3f;
                     break;
             }
     }

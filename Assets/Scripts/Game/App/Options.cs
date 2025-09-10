@@ -10,6 +10,7 @@ public class Options : MonoBehaviour
     [SerializeField] private TMP_Dropdown songDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Toggle fpsToggle;
+    [SerializeField] private Toggle antiAliasToggle;
     [SerializeField] private Slider audioVolume;
 
     private Resolution[] resolutions;
@@ -21,6 +22,11 @@ public class Options : MonoBehaviour
 
         Screen.SetResolution(AppSettings.width, AppSettings.height, AppSettings.fullScreen);
         Screen.fullScreen = AppSettings.fullScreen;
+    }
+
+    void OnEnable()
+    {
+        AppSettings.LoadSettings();
     }
 
     void Start()
@@ -44,9 +50,21 @@ public class Options : MonoBehaviour
             songDropdown.RefreshShownValue();
         }
 
+        antiAliasToggle.isOn = AppSettings.antiAlias;
         fpsToggle.isOn = AppSettings.showFPS;
         audioVolume.value = AppSettings.gameVolume;
         fullscreenToggle.isOn = AppSettings.fullScreen;
+    }
+
+    public void Aliased(bool antialiased)
+    {
+        PlayerPrefs.SetInt("AntiAlias", antialiased ? 1 : 0);
+        PlayerPrefs.Save();
+
+        AppSettings.antiAlias = antialiased;
+        AppSettings.SaveSettings();
+
+        //AppSettings.SaveSettings(); allows for a live update which loads the settings afterward, making this more like a circuit than a script
     }
 
     void PopulateSongDropdown()
@@ -67,6 +85,8 @@ public class Options : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Volume", audioVolume.value);
         PlayerPrefs.Save();
+
+        AppSettings.SaveSettings();
     }
 
     void PopulateResolutionDropdown()
@@ -139,14 +159,16 @@ public class Options : MonoBehaviour
 
         PlayerPrefs.SetInt("FullScreen", isFullscreen ? 1 : 0);
         PlayerPrefs.Save();
+        AppSettings.SaveSettings();
     }
-    
+
     public void ToggleFPS(bool isFPSDisplay)
     {
         AppSettings.showFPS = isFPSDisplay;
 
         PlayerPrefs.SetInt("showFPS", isFPSDisplay ? 1 : 0);
         PlayerPrefs.Save();
+        AppSettings.SaveSettings(); 
     }
 
 }

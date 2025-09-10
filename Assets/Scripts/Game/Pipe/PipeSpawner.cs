@@ -4,36 +4,40 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
+    public List<GameObject> Pipes;
     [SerializeField] GameObject pipePrefab;
 
     [SerializeField] float pipeSpawnTimer = 0f;
-    [SerializeField] float newPipeTime = 0f;
+    [SerializeField] float newPipeTime = 2f;
 
     public void ResetSpawner()
     {
-        pipeSpawnTimer = 99;
-        newPipeTime = 3f;
+        // Spawn a pipe after newPipeTime which is by default 2
+        pipeSpawnTimer = 0;
+        newPipeTime = 2;
     }
 
     void Update()
     {
-        if (!CONSTANTS.BIRB_ALIVE | CONSTANTS.GAME_PAUSED)
+        if (CONSTANTS.GAME_PAUSED)
             return;
-
-        pipeSpawnTimer += Time.deltaTime;
-
-        if (pipeSpawnTimer > newPipeTime)
+        
+        if (pipeSpawnTimer >= newPipeTime)
         {
             MakeNewPipe();
         }
+
+        pipeSpawnTimer += Time.deltaTime;
     }
 
 
     private void MakeNewPipe()
     {
         pipeSpawnTimer = 0f;
-        newPipeTime = Random.Range(CONSTANTS.MINIMUM_PIPESPAWN_TIME, CONSTANTS.MAXIMUM_PIPESPAWN_TIME);
-        float pipeHeight = Random.Range(-CONSTANTS.PIPE_HEIGHT, CONSTANTS.PIPE_HEIGHT);
-        Instantiate(pipePrefab, new Vector2(13, pipeHeight), Quaternion.identity);
+
+        newPipeTime = Random.Range(CONFIG.MIN_PIPE_SPAWN_TIME, CONFIG.MAX_PIPE_SPAWN_TIME);
+        float pipeHeight = Random.Range(-CONFIG.PIPE_HEIGHT, CONFIG.PIPE_HEIGHT);
+        var newPipe = Instantiate(pipePrefab, new Vector2(13, pipeHeight), Quaternion.identity);
+        Pipes.Add(newPipe); // Add the instanciated prefab of the pipe we just referenced to an array which is used to clear them
     }
 }
