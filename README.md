@@ -47,12 +47,3 @@ To submit features to Great Engine, create new GitHub issues with the Feature ta
 <img src="Assets/Sprites/UI/Logo/GE_Icon%20GithubVersion.png" width="200"/> <img src="Assets/Sprites/UI/Logo/Great%20Engine.png" width="250"/>
 
 The GitHub is a shared place for the code to exist and be hosted, as well as debated in GitHub issues which makes them the perfect place to submit features for Great Engine.
-
-<br/>
-
-### Usage
-Great Engine's usage policy follows Apache 2.0, but when a game uses Great Engine [including parts of Great Engine] it must specify **clearly** that it does in an unskippable location of the game such as the intro or on the published page.
-
-Tureen must be credited - alternatively as Tureen Creative Media - on the published page if Great Engine/parts of Great Engine were used in your project or game.
-
- > "Published page" refers to the page the project or game was published to, such as itch.io, steampowered.com and other game sites.
