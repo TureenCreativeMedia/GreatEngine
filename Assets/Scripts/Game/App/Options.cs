@@ -16,6 +16,12 @@ public class Options : MonoBehaviour
     private Resolution[] resolutions;
     private List<Vector2Int> uniqueResolutions = new List<Vector2Int>();
 
+
+    void Update()
+    {
+        CONSTANTS.INOPTIONSMENU = optionsObject.activeInHierarchy;
+    }
+
     void Awake()
     {
         AppSettings.LoadSettings();

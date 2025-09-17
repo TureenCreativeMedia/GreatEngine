@@ -1,8 +1,18 @@
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
+using System.IO;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.InputSystem.Interactions;
+
+[System.Serializable]
+public class AppConfig
+{
+    // None, EditorOnly, DevelopmentBuildOnly, Both
+    public string devTextOption = "None";
+    public int fpsCap = -1;
+    public int config_OverrideFPS = 0;
+}
 
 public static class AppSettings
 {
@@ -19,11 +29,40 @@ public static class AppSettings
     public static int hz;
     public static bool showFPS;
 
+    // Local assigner for AppConfig variables
+    public static string devTextOption = "";
+    public static int fpsCap = -1;
+    public static int config_OverrideFPS = 0;
+
+    public static void ReadAppConfig(string path)
+    {
+        string jsonPath = UnityEngine.Application.dataPath + path;
+        string json = File.ReadAllText(jsonPath);
+
+        AppConfig appConfig = JsonUtility.FromJson<AppConfig>(json);
+        Debug.Log(appConfig.devTextOption + " " + appConfig.fpsCap);
+
+        devTextOption = appConfig.devTextOption;
+        fpsCap = appConfig.fpsCap;
+        config_OverrideFPS = appConfig.config_OverrideFPS;
+
+        if (config_OverrideFPS == 1)
+        {
+            // Lock app framerate
+            UnityEngine.Application.targetFrameRate = fpsCap;
+        }
+        else
+        {
+            UnityEngine.Application.targetFrameRate = -1;
+        }
+    }
+
     public static void LoadSettings()
     {
+        ReadAppConfig("/Config/config.json");
         Resolution defaultRes = Screen.currentResolution;
-
         appVersion = UnityEngine.Application.version;
+
         gameVolume = PlayerPrefs.GetFloat("Volume", 0.7f);
         width = PlayerPrefs.GetInt("ScreenWidth", defaultRes.width);
         height = PlayerPrefs.GetInt("ScreenHeight", defaultRes.height);
@@ -95,7 +134,6 @@ public class Application : MonoBehaviour
         }
 
         Screen.fullScreen = AppSettings.fullScreen;
-        
     }
 
     void Update()

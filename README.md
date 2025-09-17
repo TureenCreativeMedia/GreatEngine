@@ -1,34 +1,22 @@
-# Great Engine <span style="color:green">v1.1.0</span>
+# Great Engine
 
 ![Flarp searchin for pipe](https://github.com/user-attachments/assets/f5f92d40-d135-45bb-89c1-f0a1633626cf)
 
+<!-->THE MAIN STUFF<-->
 
 ### Changelog
-**Version 1.1.0**
+**Version 1.2.0**
 
 > Changelog only contains things that are important to note
-- Game Changes
-    - Changed menu layout to be aligned left
-    - Score collision now dynamically resembles pipe gap size (± 0.5f)
-    - The loading bar now displays the proper percentage
-    - Score collision width can be altered in CONFIG
-    
-- Settings
-    - Added anti-aliasing toggle to settings 
-    - Changed settings layout to be less compact
-    - Each setting calls LoadSettings() everytime it's altered to ensure settings were saved 
-    
-- Optimisations
-    - "CONSTANTS_Set.cs" has been improved so much that the Update function now contains 4 lines of code, a try-catch stack trace for null variables has been implemented for required objects
-    - "PipePart.cs" has been changed so that many things like pipe rotation are handled at Start
-    - "GameUI.cs" now only updates the Death UI when it's enabled and the game score text only changes when pipes are passed through using AnimateScore() 
-
+- Additions
+    - Added config.json for ease of access (built in) changes to code
+        - devTextOption [None, EditorOnly, DevelopmentBuildOnly, Both]
+        - fpsCap
+        - config_OverrideFPS 
+    - AudioSources for buttons are now usually managed in a local parent to not disable them when leaving menus
+    <br>
 - Fixes
-    - Pipes now get cleared without possible memory loss using a reference to the instanciated prefab and not the prefab itself
-    - Options now update live (Like they were supposed to originally)
-
-- Code
-    - Code comments have appeared in some areas of code that would look absurd to beginners without explaination
+    - Loading progress no longer displays at x10 value
 
 <br/>
 

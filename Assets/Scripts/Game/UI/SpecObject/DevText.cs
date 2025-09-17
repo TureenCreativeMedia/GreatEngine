@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DevText : MonoBehaviour
 {
-    // Development text used for if DEVELOPMENT_BUILD
+    // Build text
 
     [SerializeField] GameUI referenceUI;
 

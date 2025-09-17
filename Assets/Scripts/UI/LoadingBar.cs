@@ -9,13 +9,13 @@ public class LoadingBar : MonoBehaviour
     [SerializeField] Slider bar;
     [SerializeField] TMP_Text percentage;
 
-    void Start()
+    private void Start()
     {
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void Update()
     {
-        percentage.text = $"{Mathf.Round(bar.value * 10)}%";
+        percentage.text = $"{Mathf.Round(bar.value)}%";
     }
 }

@@ -16,11 +16,44 @@ public class GameUI : MonoBehaviour
 
     void Awake()
     {
-        #if DEVELOPMENT_BUILD || UNITY_EDITOR
-            devBuildText.gameObject.SetActive(true);
-        #else
-            Destroy(devBuildText);
-        #endif
+        switch (AppSettings.devTextOption)
+        {
+            default:
+                {
+                    Destroy(devBuildText);
+                    break;
+                }
+            case "EditorOnly":
+                {
+                    #if UNITY_EDITOR
+                    devBuildText.gameObject.SetActive(true);
+                    #else
+                    Destroy(devBuildText);
+                    #endif
+                    
+                    break;
+                }
+            case "DevelopmentBuildOnly":
+                {
+                    #if DEVELOPMENT_BUILD
+                    devBuildText.gameObject.SetActive(true);
+                    #else
+                    Destroy(devBuildText);
+                    #endif
+
+                    break;
+                }
+            case "Both":
+                {
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+                    devBuildText.gameObject.SetActive(true);
+                    #else
+                    Destroy(devBuildText);
+                    #endif
+
+                    break;
+                }
+        }
     }
 
     void Update()

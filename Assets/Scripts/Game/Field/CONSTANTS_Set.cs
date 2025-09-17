@@ -24,6 +24,7 @@ public static class CONSTANTS
 
     public static bool GAME_PAUSED = false;
 
+    public static bool INOPTIONSMENU = false;
     public static float GAME_TIME = 0;
     public static string GAME_TIME_CONVERTED = "00:00";
 
@@ -145,7 +146,7 @@ public class CONSTANTS_Set : MonoBehaviour
 
     public static void Pause()
     {
-        if (!CONSTANTS.BIRB_ALIVE) return;
+        if (!CONSTANTS.BIRB_ALIVE || CONSTANTS.INOPTIONSMENU) return;
         CONSTANTS.GAME_PAUSED = !CONSTANTS.GAME_PAUSED;
 
         if (CONSTANTS.GAME_PAUSED)
