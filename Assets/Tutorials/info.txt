@@ -1,0 +1,3 @@
+These scripts are for documentation purposes, and for people who can't write code to understand Great Engine's unifications.
+
+Tutorials coming soon

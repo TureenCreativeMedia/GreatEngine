@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: 
   ue_Click:
     m_PersistentCalls:
@@ -765,6 +766,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410603631}
   m_CullTransparentMesh: 1
+--- !u!1 &452839506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452839508}
+  - component: {fileID: 452839507}
+  m_Layer: 0
+  m_Name: References
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &452839507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452839506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3418c3fe96ff0b4fab54af0373efefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingBar: {fileID: 327506469}
+  loadingScreen: {fileID: 1517759892}
+--- !u!4 &452839508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452839506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &502708998
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +920,7 @@ RectTransform:
   m_Children:
   - {fileID: 1517759893}
   m_Father: {fileID: 1272311922}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1142,7 +1189,7 @@ RectTransform:
   m_Children:
   - {fileID: 1019379700}
   m_Father: {fileID: 1272311922}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1460,6 +1507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: Game
   ue_Click:
     m_PersistentCalls:
@@ -1721,19 +1769,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320381600655, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320381600655, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320381600655, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320381600655, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -204
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320440952992, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1741,15 +1789,15 @@ PrefabInstance:
       objectReference: {fileID: 939200209}
     - target: {fileID: 8256216320518832726, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.818
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320518832726, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216320518832726, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.818
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321070598354, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1761,19 +1809,19 @@ PrefabInstance:
       objectReference: {fileID: 939200209}
     - target: {fileID: 8256216321109569989, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321109569989, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321109569989, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321109569989, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -319
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321238773149, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1794,6 +1842,10 @@ PrefabInstance:
     - target: {fileID: 8256216321489426724, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_Name
       value: OptionObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256216321489426724, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321489426727, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_Pivot.x
@@ -1881,19 +1933,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321677338900, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321677338900, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321677338900, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321677338900, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -89
       objectReference: {fileID: 0}
     - target: {fileID: 8256216321780014873, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: ue_Click.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -1917,11 +1969,11 @@ PrefabInstance:
       objectReference: {fileID: 939200209}
     - target: {fileID: 8256216322251387351, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.818
       objectReference: {fileID: 0}
     - target: {fileID: 8256216322251387351, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0422af6ed20a97448e30a67b3c92ab3, type: 3}
@@ -2087,7 +2139,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191679928}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2100,7 +2152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: -0.35, y: 3.5}
 --- !u!114 &1191679930
@@ -2182,7 +2234,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.8
+  m_MatchWidthOrHeight: 0.45
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2225,8 +2277,8 @@ RectTransform:
   - {fileID: 2145814542}
   - {fileID: 750818093}
   - {fileID: 1191679929}
-  - {fileID: 592131724}
   - {fileID: 939200207}
+  - {fileID: 592131724}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2342,7 +2394,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.11774655, g: 0.12081703, b: 0.13207549, a: 1}
+  m_BackGroundColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3429,8 +3481,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 315, y: 225}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: 300, y: 220}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2145814543
 MonoBehaviour:
@@ -3922,10 +3974,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: 
   ue_Click:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 939200206}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1019379707}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive

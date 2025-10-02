@@ -14,9 +14,10 @@ public class GameUI : MonoBehaviour
     [SerializeField] TMP_Text DeathDetails;
 
 
+
     void Awake()
     {
-        switch (AppSettings.devTextOption)
+        switch (AppSettings.DevelopmentBuildText.ToString())
         {
             default:
                 {
@@ -25,31 +26,31 @@ public class GameUI : MonoBehaviour
                 }
             case "EditorOnly":
                 {
-                    #if UNITY_EDITOR
+#if UNITY_EDITOR
                     devBuildText.gameObject.SetActive(true);
-                    #else
+#else
                     Destroy(devBuildText);
-                    #endif
-                    
+#endif
+
                     break;
                 }
             case "DevelopmentBuildOnly":
                 {
-                    #if DEVELOPMENT_BUILD
+#if DEVELOPMENT_BUILD
                     devBuildText.gameObject.SetActive(true);
-                    #else
+#else
                     Destroy(devBuildText);
-                    #endif
+#endif
 
                     break;
                 }
             case "Both":
                 {
-                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
                     devBuildText.gameObject.SetActive(true);
-                    #else
+#else
                     Destroy(devBuildText);
-                    #endif
+#endif
 
                     break;
                 }
@@ -67,16 +68,27 @@ public class GameUI : MonoBehaviour
 
         // Death Screen
         if (!DeathScreen.activeInHierarchy) return;
-            if (!DeathDetails.gameObject.activeInHierarchy) return;
+        if (!DeathDetails.gameObject.activeInHierarchy) return;
 
-            if (!(CONSTANTS.GAME_SCORE > CONSTANTS.GAME_HIGHSCORE))
-            {
-                DeathDetails.text = $"Score: {CONSTANTS.GAME_SCORE}\nTime: {CONSTANTS.GAME_TIME_CONVERTED}";
-            }
-            else
-            {
-                DeathDetails.text = $"<b>NEW HIGHSCORE!</b>\n\nScore: {CONSTANTS.GAME_SCORE}\nTime: {CONSTANTS.GAME_TIME_CONVERTED}";
-            }
+#if !DEMO_MODE
+        if (!(CONSTANTS.GAME_SCORE > CONSTANTS.GAME_HIGHSCORE))
+        {
+            DeathDetails.text = $"Score: {CONSTANTS.GAME_SCORE}\nTime: {CONSTANTS.GAME_TIME_CONVERTED}";
+        }
+        else
+        {
+            DeathDetails.text = $"<b>NEW HIGHSCORE!</b>\n\nScore: {CONSTANTS.GAME_SCORE}\nTime: {CONSTANTS.GAME_TIME_CONVERTED}";
+        }
+#else
+        if (!(CONSTANTS.GAME_SCORE > CONSTANTS.GAME_HIGHSCORE))
+        {
+            DeathDetails.text = $"Score: {CONSTANTS.GAME_SCORE}\nTime: {CONSTANTS.GAME_TIME_CONVERTED}\nXP NOT IN DEMO";
+        }
+        else
+        {
+            DeathDetails.text = $"<b>NEW HIGHSCORE!</b>\n\nScore: {CONSTANTS.GAME_SCORE}\nTime: {CONSTANTS.GAME_TIME_CONVERTED}\nXP NOT IN DEMO";
+        }
+#endif
     }
 
     public void AnimateScore()
@@ -92,7 +104,9 @@ public class GameUI : MonoBehaviour
         }
 
         scoreTextAnimator.StopPlayback();
-        scoreTextAnimator.Play("ScoreIncrease");
+
+        // Check if we didn't just start the game so we don't get an auto animation
+        if(CONSTANTS.GAME_TIME>2) scoreTextAnimator.Play("ScoreIncrease");
     }
 
 }

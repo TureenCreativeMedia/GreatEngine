@@ -1,33 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-
-public static class MusicStruct
-{
-    public static string[] SonglistNames = new string[]
-    {
-        // Song names in music_Songs should match that of MusicStruct.SonglistNames
-        "Random",
-        "Theme Song"
-    };
-}
 
 public class Music : MonoBehaviour
 {
-    [SerializeField] AudioLowPassFilter audio_lpf;
-    [SerializeField] AudioSource music_AudioSource;
-    [SerializeField] AudioClip[] music_Songs;
+    [SerializeField] private AudioLowPassFilter audio_lpf;
+    [SerializeField] private AudioSource music_AudioSource;
+    [SerializeField] private AudioClip[] music_Songs;
 
-    int mIndex;
     private float lastCutoff = -1f;
+    private bool wasPlayingLastFrame = false;
+
+    public AudioClip[] MusicSongs => music_Songs;
 
     void Start()
     {
-        // Music Index Array
-        mIndex = PlayerPrefs.GetInt("Music_SongIndex");
-        mIndex = Mathf.Clamp(mIndex, 0, music_Songs.Length);
+        PlayRandomEnabledSong();
     }
 
     void Update()
@@ -39,22 +27,38 @@ public class Music : MonoBehaviour
             audio_lpf.cutoffFrequency = targetCutoff;
             lastCutoff = targetCutoff;
         }
+
+        if (wasPlayingLastFrame && !music_AudioSource.isPlaying)
+        {
+            PlayRandomEnabledSong();
+        }
+
+        wasPlayingLastFrame = music_AudioSource.isPlaying;
     }
 
-
-    public void StartNewMusic()
+    public void PlayRandomEnabledSong()
     {
-        if (mIndex <= 0)
+        List<int> enabledSongIndices = new List<int>();
+
+        for (int i = 0; i < music_Songs.Length; i++)
         {
-            music_AudioSource.clip = music_Songs[Random.Range(0, music_Songs.Length)];
-        }
-        else
-        {
-            music_AudioSource.clip = music_Songs[mIndex - 1];
+            bool enabled = PlayerPrefs.GetInt($"{i}_enabled", 1) == 1;
+            if (enabled)
+            {
+                enabledSongIndices.Add(i);
+            }
         }
 
-        music_AudioSource.Play();
-        StartCoroutine(FastMusic());
+        if (enabledSongIndices.Count == 0)
+        {
+            Debug.LogWarning("No songs are enabled! Playing random song anyway.");
+            int randomIndex = Random.Range(0, music_Songs.Length);
+            PlaySongByID(randomIndex);
+            return;
+        }
+
+        int randomEnabledIndex = enabledSongIndices[Random.Range(0, enabledSongIndices.Count)];
+        PlaySongByID(randomEnabledIndex);
     }
 
     public IEnumerator SlowMusic()
@@ -64,8 +68,6 @@ public class Music : MonoBehaviour
             music_AudioSource.pitch = Mathf.Max(0f, music_AudioSource.pitch - 0.5f * Time.deltaTime);
             yield return null;
         }
-
-        music_AudioSource.Stop();
     }
 
     public IEnumerator FastMusic()
@@ -74,6 +76,26 @@ public class Music : MonoBehaviour
         {
             music_AudioSource.pitch = Mathf.MoveTowards(music_AudioSource.pitch, 1f, 0.5f * Time.deltaTime);
             yield return null;
+        }
+    }
+
+    public void PlaySongByID(int id)
+    {
+        if (id >= 0 && id < music_Songs.Length)
+        {
+            PlayerPrefs.SetInt("Music_SongIndex", id);
+            PlayerPrefs.Save();
+
+            music_AudioSource.clip = music_Songs[id];
+            music_AudioSource.pitch = 1f;
+            music_AudioSource.Play();
+
+            StopAllCoroutines();
+            StartCoroutine(FastMusic());
+        }
+        else
+        {
+            Debug.LogWarning($"PlaySongByID: invalid id {id}");
         }
     }
 }

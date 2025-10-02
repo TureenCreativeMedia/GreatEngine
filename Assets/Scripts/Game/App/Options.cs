@@ -3,6 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+struct MusicStruct
+{
+    public static string[] SongNames =
+    {
+        "Random",
+        "Theme Song"
+    };
+};
+
 public class Options : MonoBehaviour
 {
     [SerializeField] private GameObject optionsObject;
@@ -79,7 +88,7 @@ public class Options : MonoBehaviour
 
         List<string> options = new List<string>();
 
-        foreach (string song in MusicStruct.SonglistNames)
+        foreach (string song in MusicStruct.SongNames)
         {
             options.Add(song);
         }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public static class CONFIG
@@ -47,6 +46,7 @@ public class CONSTANTS_Set : MonoBehaviour
 {
     static Music music;
     static Controls controls;
+    static GameUI GAME_UI_SCRIPT;
     [SerializeField] Camera game_cam;
 
     void Awake()
@@ -56,6 +56,9 @@ public class CONSTANTS_Set : MonoBehaviour
 
         try
         {
+            if (GAME_UI_SCRIPT == null)
+                GAME_UI_SCRIPT = GameObject.Find("User Interface").GetComponent<GameUI>();
+
             if (CONSTANTS.PIPE_SPAWNER == null)
                 CONSTANTS.PIPE_SPAWNER = GameObject.Find("Pipe Spawner");
 
@@ -66,7 +69,7 @@ public class CONSTANTS_Set : MonoBehaviour
                 CONSTANTS.BIRB_OBJ = GameObject.FindGameObjectWithTag("Player");
 
             if (CONSTANTS.BIRB_OBJ != null && CONSTANTS.BIRB_RB == null)
-                CONSTANTS.BIRB_RB = CONSTANTS.BIRB_OBJ.GetComponent<Rigidbody2D>();
+                    CONSTANTS.BIRB_RB = CONSTANTS.BIRB_OBJ.GetComponent<Rigidbody2D>();
         }
         catch (System.Exception ex)
         {
@@ -115,9 +118,10 @@ public class CONSTANTS_Set : MonoBehaviour
         #region Main Stack
         CONSTANTS.GAME_HIGHSCORE = PlayerPrefs.GetInt("Highscore", 0);
         GamemodeChanges.ChangeGamemodeTypes();
+        GAME_UI_SCRIPT.AnimateScore();
         controls.SetVars();
         music.StopAllCoroutines();  // Stop attempting to slow or speed up music
-        music.StartNewMusic();      // Then begin to speed up music in this function if it isn't at pitch value 1
+        music.PlayRandomEnabledSong();      // Then begin to speed up music in this function if it isn't at pitch value 1
 
         CONSTANTS.GAME_PAUSED = false;
         CONSTANTS.GAME_TIME = 0f;

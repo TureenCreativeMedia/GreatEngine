@@ -608,6 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: 
   ue_Click:
     m_PersistentCalls:
@@ -2381,7 +2382,7 @@ GameObject:
   - component: {fileID: 868127446}
   - component: {fileID: 868127445}
   m_Layer: 0
-  m_Name: == (PERSONAL) MUSIC SETTER ==
+  m_Name: Music Setter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2546,6 +2547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: Title
   ue_Click:
     m_PersistentCalls:
@@ -3880,6 +3882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: 
   ue_Click:
     m_PersistentCalls:
@@ -5332,6 +5335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: Title
   ue_Click:
     m_PersistentCalls:
@@ -5651,6 +5655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: 
   ue_Click:
     m_PersistentCalls:
@@ -6695,6 +6700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924af66af8fe9ed429fd25ac1d5fdd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gamemode: 
   sceneToGo: 
   ue_Click:
     m_PersistentCalls:

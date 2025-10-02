@@ -4,64 +4,65 @@ using UnityEngine.Rendering;
 using System.IO;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.InputSystem.Interactions;
+using UnityEditor;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
-[System.Serializable]
-public class AppConfig
+public static class BuildConfig
 {
-    // None, EditorOnly, DevelopmentBuildOnly, Both
-    public string devTextOption = "None";
-    public int fpsCap = -1;
-    public int config_OverrideFPS = 0;
+    public enum AppVersionGETFROM
+    {
+        AppVersionString,
+        Unity
+    }
+
+    public static string AppVersion = "1.3.0";
+    public enum DEVELOPMENTTEXT 
+    { 
+        None,
+        EditorOnly,
+        DevelopmentBuildOnly,
+        Both
+    }
 }
 
+[System.Serializable]
 public static class AppSettings
 {
+    // Build config enabler
+        public static BuildConfig.DEVELOPMENTTEXT DevelopmentBuildText = BuildConfig.DEVELOPMENTTEXT.DevelopmentBuildOnly;
+        public static BuildConfig.AppVersionGETFROM AppVersionGETFROM = BuildConfig.AppVersionGETFROM.Unity;
+
+        public static string appVersion;
+
+
+    // End
+
     public static PostProcessLayer PostProcessLayer;
     public static bool fullScreen;
     public static Resolution screenRes;
 
-    public static string appVersion;
-    public static float gameVolume;
+    public static float gameVolume = 0.7f;
+    public static bool antiAlias = false;
+    public static int width = 1920;
+    public static int height = 1080;
+    public static int hz = 60;
+    public static bool showFPS = false;
 
-    public static bool antiAlias;
-    public static int width;
-    public static int height;
-    public static int hz;
-    public static bool showFPS;
-
-    // Local assigner for AppConfig variables
-    public static string devTextOption = "";
-    public static int fpsCap = -1;
-    public static int config_OverrideFPS = 0;
-
-    public static void ReadAppConfig(string path)
+    public static Vector2Int ScreenAspectRatio => AspectReturner.GetSimplifiedAspectRatio(width, height);
+    public static void LoadSettings()
     {
-        string jsonPath = UnityEngine.Application.dataPath + path;
-        string json = File.ReadAllText(jsonPath);
-
-        AppConfig appConfig = JsonUtility.FromJson<AppConfig>(json);
-        Debug.Log(appConfig.devTextOption + " " + appConfig.fpsCap);
-
-        devTextOption = appConfig.devTextOption;
-        fpsCap = appConfig.fpsCap;
-        config_OverrideFPS = appConfig.config_OverrideFPS;
-
-        if (config_OverrideFPS == 1)
+        // Check if we're parsing the app version from Unity or from a custom
+        if (AppVersionGETFROM == BuildConfig.AppVersionGETFROM.Unity)
         {
-            // Lock app framerate
-            UnityEngine.Application.targetFrameRate = fpsCap;
+            appVersion = UnityEngine.Application.version;
         }
         else
         {
-            UnityEngine.Application.targetFrameRate = -1;
+            appVersion = BuildConfig.AppVersion;
         }
-    }
 
-    public static void LoadSettings()
-    {
-        ReadAppConfig("/Config/config.json");
-        Resolution defaultRes = Screen.currentResolution;
-        appVersion = UnityEngine.Application.version;
+            Resolution defaultRes = Screen.currentResolution;
 
         gameVolume = PlayerPrefs.GetFloat("Volume", 0.7f);
         width = PlayerPrefs.GetInt("ScreenWidth", defaultRes.width);
@@ -100,7 +101,6 @@ public static class AppSettings
 
 public class Application : MonoBehaviour
 {
-    [SerializeField] AudioMixer MasterAudio;
     KeyCode fullscreenBind = KeyCode.F11;
 
     public static Application instance;
@@ -116,7 +116,7 @@ public class Application : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
+
         AppSettings.LoadSettings();
     }
 
@@ -138,8 +138,6 @@ public class Application : MonoBehaviour
 
     void Update()
     {
-        
-        MasterAudio.SetFloat("MasterVolume", AppSettings.gameVolume);
         AppSettings.fullScreen = Screen.fullScreen;
         AppSettings.screenRes = Screen.currentResolution;
 
@@ -153,5 +151,6 @@ public class Application : MonoBehaviour
     bool ResolutionEquals(Resolution a, Resolution b)
     {
         return a.width == b.width && a.height == b.height && a.refreshRate == b.refreshRate;
-    }
+    } 
+
 }

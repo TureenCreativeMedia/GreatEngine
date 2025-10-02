@@ -58,7 +58,7 @@ public class Controls : MonoBehaviour
         jumpAction.action.performed -= OnJump;
         jumpAction.action.Disable();
 
-        pauseAction.action.performed += OnPause;
+        pauseAction.action.performed -= OnPause;
         pauseAction.action.Disable();
     }
 

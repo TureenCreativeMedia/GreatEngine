@@ -5,70 +5,75 @@ using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
+    [Header("Gamemode Only")]
+    public string Gamemode;
+
+    [Header("Button Altering")]
     public string sceneToGo = "Game";
     [SerializeField] private UnityEvent ue_Click;
-
     [SerializeField] private UnityEvent ue_Hover;
     [SerializeField] private UnityEvent ue_Unhover;
 
-    [SerializeField] Slider loadingBar;
-    AsyncOperation operation;
-    float timer;
-    float pre_loadingTime;
-    bool canLoad;
+    [SerializeField] public Slider loadingBar;
+    private AsyncOperation operation;
+    private float timer;
+    private float pre_loadingTime;
+    private bool canLoad;
 
     [SerializeField] private bool thisDoesLoading;
 
-    void Start()
+    void Awake()
     {
         if (!thisDoesLoading) return;
 
         canLoad = false;
+
         if (loadingBar == null)
-            try { loadingBar = GameObject.Find("Loading Slider").GetComponent<Slider>(); }
-            catch { Debug.LogError($"Could not find {loadingBar} in hierarchy"); }
+        {
+            GameObject sliderObj = SceneGameObjectReferences.Instance.loadingBar;
+            if (sliderObj != null)
+            {
+                loadingBar = sliderObj.GetComponent<Slider>();
+            }
+            else
+            {
+                Debug.Log("Cannot find sliderObj (Slider) on loadingBar, SceneGameObjectReferences.loadingBar may not be set correctly");
+            }
+        }
     }
+
+
     void Update()
     {
-        timer += Time.deltaTime;
+        if (operation != null) timer += Time.deltaTime;
 
         if (operation != null)
         {
             Debug.Log($"{operation.progress * 100}%");
-            if (loadingBar != null) loadingBar.value = operation.progress * 100;
-        }
-
-        if (timer > pre_loadingTime && canLoad)
-        {
-            operation = SceneManager.LoadSceneAsync(sceneToGo);
-            canLoad = false;
+            if (loadingBar != null)
+            {
+                SceneGameObjectReferences.Instance.loadingScreen?.SetActive(true);
+                loadingBar.transform.gameObject.SetActive(true);
+                loadingBar.value = operation.progress * 100; // 0 to 1
+            }
         }
     }
 
     public void TravelScene()
     {
         timer = 0;
-        pre_loadingTime = .5f;
+        pre_loadingTime = 0.5f;
         canLoad = true;
+        operation = SceneManager.LoadSceneAsync(sceneToGo);
     }
 
-    public void Hover()
+    public void SetCONSTANTSGamemode()
     {
-        ue_Hover.Invoke();
+        CONSTANTS.GAME_TYPE = Gamemode;
     }
 
-    public void Unhover()
-    {
-        ue_Unhover.Invoke();
-    }
-
-    public void Click()
-    {
-        ue_Click.Invoke();
-    }
-
-    public void Quit()
-    {
-        UnityEngine.Application.Quit();
-    }
+    public void Hover() => ue_Hover.Invoke();
+    public void Unhover() => ue_Unhover.Invoke();
+    public void Click() => ue_Click.Invoke();
+    public void Quit() => UnityEngine.Application.Quit();
 }
