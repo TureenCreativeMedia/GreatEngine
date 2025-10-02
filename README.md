@@ -2,24 +2,6 @@
 
 ![Flarp searchin for pipe](https://github.com/user-attachments/assets/f5f92d40-d135-45bb-89c1-f0a1633626cf)
 
-<!-->THE MAIN STUFF<-->
-
-### Changelog
-**Version 1.2.0**
-
-> Changelog only contains things that are important to note
-- Additions
-    - Added config.json for ease of access (built in) changes to code
-        - devTextOption [None, EditorOnly, DevelopmentBuildOnly, Both]
-        - fpsCap
-        - config_OverrideFPS 
-    - AudioSources for buttons are now usually managed in a local parent to not disable them when leaving menus
-    <br>
-- Fixes
-    - Loading progress no longer displays at x10 value
-
-<br/>
-
 ### About Great Engine
 Great Engine is an official framework by Tureen built with Unity to create Great Flarp Birb games without needing to set up the frivolous mechanics beforehand.
 
